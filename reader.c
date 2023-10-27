@@ -2,7 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
-#include <time.h>
+#include <unistd.h>
+#include <libpq-fe.h>
+#include <sys/time.h>
+
+// Read database configurations from a JSON file
+json_t* read_db_config(const char* filename) {
+    json_error_t error;
+    json_t* root = json_load_file(filename, 0, &error);
+    if (!root) {
+        fprintf(stderr, "Error reading JSON file: %s\n", error.text);
+        return NULL;
+    }
+    return root;
+}
 
 // Structuring for database configurations
 typedef struct {
