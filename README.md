@@ -1,4 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/qg4qXfSB)
+
+
+
 Hello, this is the second assignment for the Principles of Distributed Systems. The concept is about implementation of the asynchronous concurrent messaging. Therefore, I wrote a sender and reader software that reads the list of Database server IPs. It connected to all the DBs in different threads.  
 In the sender software, created threads equal to the DB servers, and request user's input. Every time the user enters a text, it chose one of the threads and inserts a record into ASYNC_MESSAGE table with SENDER_NAME , entered message and current_time.
 In the reader software, checked available messages in each DB. Avail message is the one that has (RECEIVED_TIME IS NULL and SENDER_NAME != yours).
