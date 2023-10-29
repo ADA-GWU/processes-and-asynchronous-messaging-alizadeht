@@ -1,10 +1,11 @@
 import threading
 import psycopg2
 import time
+import psycopg2
+import json
 
-# Function for retrieving&marking messages as received for db
+# Function to retrieve and mark messages as received
 def read_and_mark_messages(db_server, sender_name):
-    conn = psycopg2.connect(db_server)  # Connect to the database
     cursor = conn.cursor()
 
     while True:
@@ -17,5 +18,12 @@ def read_and_mark_messages(db_server, sender_name):
             cursor.execute("UPDATE async_messages SET received_time = %s WHERE record_id = %s", (time.strftime('%Y-%m-%d %H:%M:%S'), record_id))
             conn.commit()
 
-    cursor.close()
     conn.close()
+
+# Load the database details from the configuration file
+with open('config.json', 'r') as config_file:
+    config = json.load(config_file)
+
+db_name = config['db_name']
+db_user = config['db_user']
+db_password = config['db_password']
