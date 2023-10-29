@@ -29,7 +29,7 @@ You have to enter the details of the database in sender.py as shown below:
 After that, informations about the database will be sent to JSON file:
 <img width="633" alt="image" src="https://github.com/ADA-GWU/processes-and-asynchronous-messaging-alizadeht/assets/78111301/85c7b000-6fe6-481b-8c52-7b896647c742">
 
-Then, write something you want, and see that message in the database:
+Then, write something you want, and you will see that message in the database:
 <img width="830" alt="image" src="https://github.com/ADA-GWU/processes-and-asynchronous-messaging-alizadeht/assets/78111301/81c0a1ef-c309-4215-9e67-d435e6ef5a81">
 
    
