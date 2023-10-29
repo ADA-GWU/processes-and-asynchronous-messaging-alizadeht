@@ -49,4 +49,19 @@ def sender_thread(connect):
         message = input("Enter your message (or type 'exit' to quit): ")
         if message.lower() == 'exit':
             break
-        insert_message(message, sender_name, connect)s
+        insert_message(message, sender_name, connect)
+
+# Create sender threads for each DB server
+sender_threads = []
+for conn in connections:
+    thread = threading.Thread(target=sender_thread, args=(conn,))
+    sender_threads.append(thread)
+    thread.start()
+
+# Wait for sender threads to finish
+for thread in sender_threads:
+    thread.join()
+
+# It will shut down connections when process is finished
+for conn in connections:
+    conn.close()
