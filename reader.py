@@ -4,7 +4,7 @@ import time
 import psycopg2
 import json
 
-# Function to retrieve and mark messages as received
+# Function to retrieve&mark messages -> received
 def read_and_mark_messages(db_server, sender_name):
     cursor = conn.cursor()
 
@@ -27,3 +27,19 @@ with open('config.json', 'r') as config_file:
 db_name = config['db_name']
 db_user = config['db_user']
 db_password = config['db_password']
+
+# Database server IP 
+db_server_ips = ['127.0.0.1']
+connections = []
+
+sender_name = 'Tural'  # Sender Name
+
+# Connections to database server
+for ip in db_server_ips:
+    conn = psycopg2.connect(
+        host=ip,
+        database=db_name,
+        user=db_user,
+        password=db_password
+    )
+    connections.append(conn)
