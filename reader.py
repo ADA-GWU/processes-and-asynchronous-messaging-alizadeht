@@ -12,7 +12,7 @@ def read_and_mark_messages(conn, sender_name):
         text = cursor.fetchone()
 
         if text:
-            record_id, sender, msg, sent_time = text
+            record_id, sender, msg, sent_time, received_time = text
             
             print(f"Sender {sender} sent '{msg}' at time {sent_time}.")
 
