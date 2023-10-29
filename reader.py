@@ -13,7 +13,7 @@ def read_and_mark_messages(conn, sender_name):
 
         if text:
             record_id, sender, msg, sent_time = text
-            received_time = time.strftime('%Y-%m-%d %H:%M:%S')
+            
             print(f"Sender {sender} sent '{msg}' at time {sent_time}.")
 
             cursor.execute("UPDATE async_messages SET received_time = NOW() WHERE record_id = %s", (record_id,))
