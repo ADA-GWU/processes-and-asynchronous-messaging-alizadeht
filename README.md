@@ -9,6 +9,8 @@ In the reader software, checked available messages in each DB. Avail message is 
 
 How to install: download as a zip file from GitHub.
 
+If you want to download Python: https://www.python.org/downloads/ 
+
 To run the code: open the terminal(2 windows, 1 for reader, 1 for sender) For each window, write the code below:
 
 P.S: cd filepath is a must!
