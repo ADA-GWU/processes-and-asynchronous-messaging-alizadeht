@@ -19,8 +19,11 @@ You can compile the code and run the application on any OS.
 2. reader:
  python reader.py (if you have macOS, try python3 reader.py)
 
+
 You have to enter the details of database in sender.py as shown below:
 <img width="567" alt="image" src="https://github.com/ADA-GWU/processes-and-asynchronous-messaging-alizadeht/assets/78111301/eb173bbb-ab38-44bb-b999-d4865795bc17">
 
+After that, informations about database will be sent to json file:
+<img width="633" alt="image" src="https://github.com/ADA-GWU/processes-and-asynchronous-messaging-alizadeht/assets/78111301/85c7b000-6fe6-481b-8c52-7b896647c742">
 
    
