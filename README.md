@@ -26,6 +26,8 @@ You can compile the code and run the application on any OS.
 
 P.S: You have to run sender and write the details of database in order to run reader!
 
+Set your database's port number as 5432!
+
 You have to enter the details of the database in sender.py as shown below:
 <img width="567" alt="image" src="https://github.com/ADA-GWU/processes-and-asynchronous-messaging-alizadeht/assets/78111301/eb173bbb-ab38-44bb-b999-d4865795bc17">
 
