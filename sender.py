@@ -25,3 +25,28 @@ config = {
 
 with open('config.json', 'w') as config_file:
     json.dump(config, config_file)
+
+# Database server IP 
+db_server_ips = ['127.0.0.1']
+connections = []
+threads = []
+
+# Connections to database server
+for ip in db_server_ips:
+    conn = psycopg2.connect(
+        host=ip,
+        database=db_name,
+        user=db_user,
+        password=db_password
+    )
+    connections.append(conn)
+
+sender_name = 'Tural'  # Showing the Sender Name
+
+# Function to send messages
+def sender_thread(connect):
+    while True:
+        message = input("Enter your message (or type 'exit' to quit): ")
+        if message.lower() == 'exit':
+            break
+        insert_message(message, sender_name, connect)s

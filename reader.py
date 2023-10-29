@@ -9,14 +9,20 @@ def read_and_mark_messages(db_server, sender_name):
     cursor = conn.cursor()
 
     while True:
-        cursor.execute("SELECT record_id, sender_name, message, sent_time FROM async_messages WHERE received_time IS NULL AND sender_name != %s FOR UPDATE", (sender_name,))
-        message = cursor.fetchone()
+        cursor.execute("SELECT record_id, sender_name, message, sent_time, received_time FROM async_messages WHERE received_time IS NULL AND sender_name != %s FOR UPDATE", (sender_name,))
+        text = cursor.fetchone()
 
-        if message:
-            record_id, sender, msg, sent_time = message
-            print(f"Sender {sender} sent '{msg}' at time {sent_time}.")
-            cursor.execute("UPDATE async_messages SET received_time = %s WHERE record_id = %s", (time.strftime('%Y-%m-%d %H:%M:%S'), record_id))
+        if text:
+            record_id, sender, message, sent_time, received_time = text
+            received_time = time.strftime('%Y-%m-%d %H:%M:%S')
+            print(f"Sender {sender} sent '{msg}' at {sent_time}. Received at {received_time}.")
+            cursor.execute("UPDATE async_messages SET received_time = %s WHERE record_id = %s", (received_time, record_id))
             conn.commit()
+
+            if received_time is not None:
+                print(f"Sender {sender} sent '{msg}' at {sent_time}. Received at {received_time}.")
+            else:
+                print(f"Sender {sender} sent '{msg}' at {sent_time}. Not received yet.")
 
     conn.close()
 
@@ -32,7 +38,7 @@ db_password = config['db_password']
 db_server_ips = ['127.0.0.1']
 connections = []
 
-sender_name = 'Tural'  # Sender Name
+sender_name = 'Tural'  # Showing the Sender Name
 
 # Connections to database server
 for ip in db_server_ips:
@@ -43,3 +49,10 @@ for ip in db_server_ips:
         password=db_password
     )
     connections.append(conn)
+
+# Create reader threads for each DB server
+reader_threads = []
+for conn in connections:
+    thread = threading.Thread(target=read_and_mark_messages, args=(conn, sender_name))
+    reader_threads.append(thread)
+    thread.start()
