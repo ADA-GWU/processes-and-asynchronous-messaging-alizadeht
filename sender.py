@@ -37,7 +37,8 @@ for ip in db_server_ips:
         host=ip,
         database=db_name,
         user=db_user,
-        password=db_password
+        password=db_password,
+        port="5432"
     )
     connections.append(conn)
 
